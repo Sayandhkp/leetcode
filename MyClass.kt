@@ -2,6 +2,7 @@ package com.example.lib
 
 import java.util.*
 
+
 fun main(args:Array<String>){
 
     var result=MyClass().lengthOfLongestSubstring("aab")
@@ -118,62 +119,53 @@ class MyClass {
 //     */
 
     fun mergeTwoLists(): ListNode? {
-        var l1: ListNode?= ListNode(1)
-        var m1=ListNode(2)
-        m1.next= ListNode(4)
-        l1?.next= m1
-//        l1?.next= ListNode(4)
+        val l1 = ListNode(1)
+        val m1 = ListNode(2)
+        val n1 = ListNode(4)
 
-        var l2: ListNode?= ListNode(1)
-        var m2=ListNode(3)
-        m2.next=ListNode(4)
-        l2?.next= m2
-        var result=ListNode(-1)
-        var dummy=result
+        l1.next=m1
+        m1.next=n1
 
-        if (l1==null&&l2==null){
-            return null
-        }else if(l1==null){
-            return l2
-        }else if(l2==null){
-            return  l1
-        }
-        var node1=l1
-        var node2=l2
-        while (node1!=null||node2!=null){
-            when {
-                node1==null -> {
-                    result.next=ListNode(node2!!.`val`)
-                    node2=node2.next
-                }
-                node2==null -> {
-                    result.next=ListNode(node1.`val`)
-                    node1=node1.next
-                }
-                else -> {
-//                    dummy=result.next!!
-                    if(node1.`val`<=node2.`val`){
-                        dummy=(ListNode(node1.`val`))
-                        dummy.next=ListNode(node2.`val`)
-                    }else{
-                        dummy=(ListNode(node2.`val`))
-                        dummy.next=ListNode(node1.`val`)
+        print(n1);
+
+        val l2 = ListNode(1)
+        val m2 = ListNode(2)
+        val n2 = ListNode(4)
+
+        l2.next=m2
+        m2.next=n2
+
+        return if (l1 == null && l2 == null) {
+            null
+        } else if (l1 == null) {
+            l2
+        } else if (l2 == null) {
+            l1
+        } else {
+            val result = ListNode(-1)
+            var dummy: ListNode? = result
+            var node1: ListNode? = l1
+            var node2: ListNode? = l2
+            while (node1 != null || node2 != null) {
+                if (node1 == null) {
+                    dummy!!.next = ListNode(node2!!.`val`)
+                    node2 = node2!!.next
+                } else if (node2 == null) {
+                    dummy!!.next = ListNode(node1.`val`)
+                    node1 = node1.next
+                } else {
+                    if (node1.`val` < node2.`val`) {
+                        dummy!!.next = ListNode(node1.`val`)
+                        node1 = node1.next
+                    } else {
+                        dummy!!.next = ListNode(node2.`val`)
+                        node2 = node2.next
                     }
-                    result.next=dummy
-
-
-                    node1=node1.next
-                    node2=node2.next
                 }
-
-
+                dummy = dummy!!.next
             }
-            dummy=dummy.next!!
-            result=result.next!!
+            dummy!!.next = null
+            result.next
         }
-
-
-
-        return result
     }
 }
