@@ -21,12 +21,7 @@ fun main(args:Array<String>){
 
 //    MyClass().mergeTwoLists()
 }
-private fun printResult(comment: String,result:String){
-    print(comment)
-    print("\n")
-    print(result)
-    print("\n")
-}
+
 class MyClass {
     fun lengthOfLongestSubstring(s: String): Int {
         var start = 0
