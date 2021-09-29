@@ -31,19 +31,24 @@ Output: 3
 
 fun main(args:Array<String>){
 
-    var result = merge(intArrayOf(0),0, intArrayOf(1),1)
+    var result = merge(intArrayOf(1,2,3,0,0,0),5, intArrayOf(2,5,6),1)
     printResult("Merge Sorted Array ", result.toString())
 }
 
 fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
 
-
+    if(m==0){
+        for (i  in nums2.indices){
+            nums1[i]=nums2[i]
+        }
+    }
     var i=0
     var j=0
     var res=0
+    var pointer=0
     if (m != 0 && n != 0) {
 
-            while (i<m||j<n){
+            while (i<m&&j<n){
                 if (nums1[i]==0){
                     nums1[res]=nums2[j]
                     j++
@@ -52,10 +57,20 @@ fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
                 if(nums1[i] < nums2[j]) {
                     i++
                 }else if (nums1[i] > nums2[j]){
-                    val x=nums1[res]
+                    var x=nums1[res]
                     nums1[res] = nums2[j]
-                    nums2[j]=x
+
                     i++
+                    j++
+
+                    if(nums1[i]<x){
+                        nums1[m+pointer]=x
+                    }else{
+                        x+=nums1[i]
+                        nums1[i]=x-nums1[i]
+                        nums1[m+pointer]=x-nums1[i]
+                    }
+                    pointer++
                 }else {
                     nums1[res] = nums1[i]
                     res++
@@ -66,9 +81,13 @@ fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
                 }
                 res++
             }
-        }else if(m==0){
-        for (x in 0 until n){
-            nums1[x]=nums2[x]
+        if(nums1.last()< nums1[nums1.size-2]){
+            nums1[nums1.size-2]+=nums1[nums1.size-1]
+            nums1[nums1.size-1]=nums1[nums1.size-2]-nums1[nums1.size-1]
+            nums1[nums1.size-2]=nums1[nums1.size-2]-nums1[nums1.size-1]
+
         }
+
+        println(nums1)
     }
 }
