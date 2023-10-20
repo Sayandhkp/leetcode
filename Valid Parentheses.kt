@@ -15,12 +15,12 @@ Example 1:
 
 Input: s = "()"
 Output: true
-Example 2:
 
+Example 2:
 Input: s = "()[]{}"
 Output: true
-Example 3:
 
+Example 3:
 Input: s = "(]"
 Output: false
 Example 4:
@@ -35,7 +35,7 @@ Output: true
 
 fun main(args:Array<String>){
 
-    var result= isValid("{[]}")
+    var result= isValid("{[]()}")
     printResult("Remove Element ",result.toString())
 }
 
@@ -56,6 +56,5 @@ fun isValid(s: String): Boolean {
         }
 
     }
-
     return stack.isEmpty()
 }
